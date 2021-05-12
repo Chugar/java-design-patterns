@@ -3,6 +3,10 @@ package com.chugar;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
+import com.chugar.patterns.Adapter.Customer;
+import com.chugar.patterns.Adapter.Employe;
+import com.chugar.patterns.Adapter.EmployeAdapter;
+import com.chugar.patterns.Adapter.ICustomer;
 import com.chugar.patterns.builder.Phone;
 import com.chugar.patterns.builder.PhoneBuilder;
 import com.chugar.patterns.decorator.CarDecorator;
@@ -28,7 +32,8 @@ public class MainApp {
 		// singletonPattern();
 		// prototypePattern();
 		// builderPattern();
-		decoratorPattern();
+		// decoratorPattern();
+		adapterPattern();
 	}
 
 	
@@ -105,7 +110,7 @@ public class MainApp {
 	 * Prototype
 	 * Creational pattern
 	 * 
-	 * Creates an instance from an already existing object
+	 * Creates a copy from an existing object
 	 */
 	public static void prototypePattern() {
 		
@@ -126,7 +131,9 @@ public class MainApp {
 	 * Builder
 	 * Creational pattern
 	 * 
-	 * Helps creating a complex object by bypassing a parameterized construct creation
+	 * Helps creating complex objects
+	 * Bypasses a parameterized construct during instantiation
+	 * 
 	 */
 	public static void builderPattern() {
 		PhoneBuilder phoneBuilder = new PhoneBuilder();
@@ -141,14 +148,35 @@ public class MainApp {
 	}
 	
 	/**
+	 * Decorator
+	 * Structural pattern
+	 * 
 	 * 
 	 */
 	public static void decoratorPattern() {
+		
 		Car myCar = new PlainCar();
 		
 		myCar = new TuroOption(myCar);
 		myCar = new SunroofOption(myCar);
 		
 		System.out.println(myCar.getDescription());
+	}
+	
+	/**
+	 * Adapter
+	 * Structural pattern
+	 * 
+	 * Allows two unrelated interfaces to have the same behavior
+	 * without changing any of the two
+	 */
+	public static void adapterPattern() {
+		
+		Customer benoit = new Customer("Benoit", "Duchene");
+		Employe dev = new Employe("le dev de la boite", 4200);
+		ICustomer leDev = new EmployeAdapter(dev);
+		
+		benoit.showClientNumber();
+		leDev.showClientNumber();
 	}
 }
