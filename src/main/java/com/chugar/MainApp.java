@@ -7,21 +7,24 @@ import com.chugar.patterns.Adapter.Customer;
 import com.chugar.patterns.Adapter.Employe;
 import com.chugar.patterns.Adapter.EmployeAdapter;
 import com.chugar.patterns.Adapter.ICustomer;
+import com.chugar.patterns.bridge.DVDDevice;
+import com.chugar.patterns.bridge.MuteRemote;
+import com.chugar.patterns.bridge.PauseRemote;
+import com.chugar.patterns.bridge.Remote;
+import com.chugar.patterns.bridge.TVDevice;
 import com.chugar.patterns.builder.Phone;
 import com.chugar.patterns.builder.PhoneBuilder;
-import com.chugar.patterns.decorator.CarDecorator;
+import com.chugar.patterns.decorator.Car;
 import com.chugar.patterns.decorator.PlainCar;
 import com.chugar.patterns.decorator.SunroofOption;
 import com.chugar.patterns.decorator.TuroOption;
 import com.chugar.patterns.observer.Client;
 import com.chugar.patterns.observer.Magasin;
-import com.chugar.patterns.prototype.Animal;
 import com.chugar.patterns.prototype.Sheep;
 import com.chugar.patterns.singleton.ScrableSingleton;
 import com.chugar.patterns.strategy.Bird;
 import com.chugar.patterns.strategy.Dog;
 import com.chugar.patterns.strategy.action.FlyHigh;
-import com.chugar.patterns.decorator.Car;
 
 public class MainApp {
 
@@ -33,7 +36,8 @@ public class MainApp {
 		// prototypePattern();
 		// builderPattern();
 		// decoratorPattern();
-		adapterPattern();
+		// adapterPattern();
+		bridgePattern();
 	}
 
 	
@@ -178,5 +182,33 @@ public class MainApp {
 		
 		benoit.showClientNumber();
 		leDev.showClientNumber();
+	}
+	
+	/**
+	 * Bridge
+	 * Structural pattern
+	 * 
+	 * Decouples an abstraction from its implementation
+	 */
+	public static void bridgePattern() {
+		Remote pauseRemote = new PauseRemote(new TVDevice(1, 200));
+		Remote muteRemote =  new MuteRemote(new TVDevice(1, 200));
+		Remote dvdPauseRemote = new PauseRemote(new DVDDevice(0, 15));
+		
+		pauseRemote.pressRight();
+		pauseRemote.pressLeft();
+		pauseRemote.pressMiddleButton();
+		System.out.println();
+		
+		muteRemote.pressRight();
+		muteRemote.pressLeft();
+		muteRemote.pressMiddleButton();
+		System.out.println();
+		
+		dvdPauseRemote.pressRight();
+		dvdPauseRemote.pressLeft();
+		dvdPauseRemote.pressLeft();
+		dvdPauseRemote.pressMiddleButton();
+		
 	}
 }
