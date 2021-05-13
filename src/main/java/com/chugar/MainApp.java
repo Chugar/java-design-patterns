@@ -1,6 +1,7 @@
 package com.chugar;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 import com.chugar.patterns.Adapter.Customer;
@@ -14,6 +15,11 @@ import com.chugar.patterns.bridge.Remote;
 import com.chugar.patterns.bridge.TVDevice;
 import com.chugar.patterns.builder.Phone;
 import com.chugar.patterns.builder.PhoneBuilder;
+import com.chugar.patterns.chainOfResponsibility.ChainAdd;
+import com.chugar.patterns.chainOfResponsibility.ChainMax;
+import com.chugar.patterns.chainOfResponsibility.ChainMin;
+import com.chugar.patterns.chainOfResponsibility.MathChain;
+import com.chugar.patterns.chainOfResponsibility.Numbers;
 import com.chugar.patterns.decorator.Car;
 import com.chugar.patterns.decorator.PlainCar;
 import com.chugar.patterns.decorator.SunroofOption;
@@ -37,7 +43,8 @@ public class MainApp {
 		// builderPattern();
 		// decoratorPattern();
 		// adapterPattern();
-		bridgePattern();
+		// bridgePattern();
+		chainOfResponsibility();
 	}
 
 	
@@ -209,6 +216,29 @@ public class MainApp {
 		dvdPauseRemote.pressLeft();
 		dvdPauseRemote.pressLeft();
 		dvdPauseRemote.pressMiddleButton();
+		
+	}
+	
+	
+	/**
+	 * Chain of responsibility
+	 * Behavioral pattern
+	 * 
+	 * Allows to pass requests along a chain of handlers
+	 * Then decides to process the request or to pass it to the next handler
+	 */
+	public static void chainOfResponsibility() {
+		
+		MathChain chainAdd = new ChainAdd();
+		MathChain chainMin = new ChainMin();
+		MathChain chainMax = new ChainMax();
+		
+		chainAdd
+			.setNextChain(chainMin)
+			.setNextChain(chainMax);
+		
+		Numbers n = new Numbers(Arrays.asList(12,3,5,75), "max");
+		chainAdd.calculate(n);
 		
 	}
 }
