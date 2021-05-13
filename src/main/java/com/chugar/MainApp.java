@@ -14,7 +14,6 @@ import com.chugar.patterns.bridge.PauseRemote;
 import com.chugar.patterns.bridge.Remote;
 import com.chugar.patterns.bridge.TVDevice;
 import com.chugar.patterns.builder.Phone;
-import com.chugar.patterns.builder.PhoneBuilder;
 import com.chugar.patterns.chainOfResponsibility.ChainAdd;
 import com.chugar.patterns.chainOfResponsibility.ChainMax;
 import com.chugar.patterns.chainOfResponsibility.ChainMin;
@@ -40,11 +39,12 @@ public class MainApp {
 		// observerPattern();
 		// singletonPattern();
 		// prototypePattern();
-		// builderPattern();
+		builderPattern();
 		// decoratorPattern();
 		// adapterPattern();
 		// bridgePattern();
-		chainOfResponsibility();
+		// chainOfResponsibility();
+		
 	}
 
 	
@@ -143,12 +143,12 @@ public class MainApp {
 	 * Creational pattern
 	 * 
 	 * Helps creating complex objects
-	 * Bypasses a parameterized construct during instantiation
+	 * Bypasses a parameterized construct
 	 * 
 	 */
 	public static void builderPattern() {
-		PhoneBuilder phoneBuilder = new PhoneBuilder();
-		Phone smartphone = phoneBuilder
+		
+		Phone smartphone = Phone.newPhone()
 			.setBrand("brand")
 			.setOs("os")
 			.setPrice(123)
@@ -227,7 +227,7 @@ public class MainApp {
 	 * Allows to pass requests along a chain of handlers
 	 * Then decides to process the request or to pass it to the next handler
 	 */
-	public static void chainOfResponsibility() {
+	public static void chainOfResponsibilityPattern() {
 		
 		MathChain chainAdd = new ChainAdd();
 		MathChain chainMin = new ChainMin();
@@ -241,4 +241,7 @@ public class MainApp {
 		chainAdd.calculate(n);
 		
 	}
-}
+	
+	
+
+} 

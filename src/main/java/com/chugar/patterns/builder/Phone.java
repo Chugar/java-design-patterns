@@ -7,12 +7,15 @@ public class Phone {
 	private int price;
 	private int ram;
 	
-	public Phone(String os, String brand, int price, int ram) {
-		super();
-		this.os = os;
-		this.brand = brand;
-		this.price = price;
-		this.ram = ram;
+	public Phone(PhoneBuilder builder) {
+		this.os = builder.getOs();
+		this.brand = builder.getBrand();
+		this.price = builder.getPrice();
+		this.ram = builder.getRam();
+	}
+	
+	public static PhoneBuilder newPhone() {
+		return new PhoneBuilder();
 	}
 
 	public String getOs() {

@@ -1,12 +1,30 @@
 package com.chugar.patterns.builder;
 
-public class PhoneBuilder {
+public final class PhoneBuilder {
 	
 	private String os;
 	private String brand;
 	private int price;
 	private int ram;
 	
+	
+	
+	public String getOs() {
+		return os;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public int getRam() {
+		return ram;
+	}
+
 	public PhoneBuilder setOs(String os) {
 		this.os = os;
 		return this;
@@ -28,7 +46,7 @@ public class PhoneBuilder {
 	}
 	
 	public Phone buildPhone() {
-		return new Phone(this.os, this.brand, this.price, this.ram);
+		return new Phone(this);
 	}
 	
 	
