@@ -19,14 +19,19 @@ import com.chugar.patterns.chainOfResponsibility.ChainMax;
 import com.chugar.patterns.chainOfResponsibility.ChainMin;
 import com.chugar.patterns.chainOfResponsibility.MathChain;
 import com.chugar.patterns.chainOfResponsibility.Numbers;
+import com.chugar.patterns.composite.Song;
+import com.chugar.patterns.composite.SongComponent;
+import com.chugar.patterns.composite.SongGroup;
 import com.chugar.patterns.decorator.Car;
 import com.chugar.patterns.decorator.PlainCar;
 import com.chugar.patterns.decorator.SunroofOption;
 import com.chugar.patterns.decorator.TuroOption;
+import com.chugar.patterns.facade.BankAccount;
 import com.chugar.patterns.observer.Client;
 import com.chugar.patterns.observer.Magasin;
 import com.chugar.patterns.prototype.Sheep;
 import com.chugar.patterns.singleton.ScrableSingleton;
+import com.chugar.patterns.state.ATMMachine;
 import com.chugar.patterns.strategy.Bird;
 import com.chugar.patterns.strategy.Dog;
 import com.chugar.patterns.strategy.action.FlyHigh;
@@ -39,11 +44,14 @@ public class MainApp {
 		// observerPattern();
 		// singletonPattern();
 		// prototypePattern();
-		builderPattern();
+		// builderPattern();
 		// decoratorPattern();
 		// adapterPattern();
 		// bridgePattern();
 		// chainOfResponsibility();
+		// compositePattern();
+		// facadePattern();
+		statePattern();
 		
 	}
 
@@ -242,6 +250,60 @@ public class MainApp {
 		
 	}
 	
+	
+	
+	/**
+	 * Composite
+	 * Structural pattern
+	 * 
+	 * Its purpose is to create tree structure hierarchy
+	 */
+	public static void compositePattern() {
+		
+		SongComponent soul = new SongGroup("Soul music", "Bla bla bla");
+		SongComponent neoSoul = new SongGroup("Neo Soul", "Nice fuzzy and mellow");
+		
+		soul.add(neoSoul);
+		soul.add(new Song("Oh mama", "marvin gaye", LocalDate.of(1970, 7, 13)));
+		soul.add(new Song("Lets stay together", "al green", LocalDate.of(1972, 8, 21)));
+		
+		
+		soul.displaySongInfo();
+
+	}
+	
+	
+	/**
+	 * Facade
+	 */
+	public static void facadePattern() {
+		
+		BankAccount myAccount = new BankAccount(213, 1234);
+		
+		// Hidden actions performed by other objects
+		myAccount.userLogIn();
+		myAccount.makeWithrawal(300.00);
+		myAccount.makeDeposit(2000.00);
+		myAccount.makeWithrawal(300.00);
+		
+	}
+	
+	
+	
+	/**
+	 * State pattern
+	 */
+	public static void statePattern() {
+		ATMMachine machine = new ATMMachine();
+		machine.insertCard();
+		machine.insertCard();
+		machine.ejectCard();
+		
+		machine.insertCard();
+		machine.insertpin(1234);
+		machine.requestCash(20000);	
+		machine.ejectCard();	
+	}
 	
 
 } 
