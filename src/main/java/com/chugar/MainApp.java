@@ -27,6 +27,10 @@ import com.chugar.patterns.decorator.PlainCar;
 import com.chugar.patterns.decorator.SunroofOption;
 import com.chugar.patterns.decorator.TuroOption;
 import com.chugar.patterns.facade.BankAccount;
+import com.chugar.patterns.iterator.ArrayListProvider;
+import com.chugar.patterns.iterator.ArrayProvider;
+import com.chugar.patterns.iterator.HashProvider;
+import com.chugar.patterns.iterator.IterationReader;
 import com.chugar.patterns.observer.Client;
 import com.chugar.patterns.observer.Magasin;
 import com.chugar.patterns.prototype.Sheep;
@@ -57,7 +61,8 @@ public class MainApp {
 		// facadePattern();
 		// statePattern();
 		// templatePattern();
-		proxyPattern();
+		// proxyPattern();
+		iteratorPattern();
 		
 	}
 
@@ -334,6 +339,8 @@ public class MainApp {
 	/**
 	 * Proxy
 	 * Structural pattern
+	 * 
+	 * 
 	 */
 	public static void proxyPattern() {
 		
@@ -346,13 +353,31 @@ public class MainApp {
 		MessageProxy proxyEmitter = new MessageEmitter();
 		proxyEmitter.emitMessage();
 		proxyEmitter.knownMethod();
-		
-		
 		// forbidden methods : errors out
 		// proxyEmitter.emitPassword();
 		// proxyEmitter.secretMethod();
 		
 	}
 	
+	
+	/**
+	 * Iterator
+	 * Behavioral pattern
+	 * 
+	 */
+	public static void iteratorPattern() {
+		
+		HashProvider hashProvider = new HashProvider();
+		ArrayProvider arrayProvider = new ArrayProvider();
+		ArrayListProvider arrayListProvider = new ArrayListProvider();
+		
+		
+		IterationReader.readFurnitures(hashProvider.getFurnitureIterator());
+		System.out.println("---");
+		IterationReader.readFurnitures(arrayProvider.getFurnitureIterator());
+		System.out.println("---");
+		IterationReader.readFurnitures(arrayListProvider.getFurnitureIterator());
 
+		
+	}
 } 
