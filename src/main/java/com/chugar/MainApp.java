@@ -30,11 +30,15 @@ import com.chugar.patterns.facade.BankAccount;
 import com.chugar.patterns.observer.Client;
 import com.chugar.patterns.observer.Magasin;
 import com.chugar.patterns.prototype.Sheep;
+import com.chugar.patterns.proxy.MessageEmitter;
+import com.chugar.patterns.proxy.MessageProxy;
 import com.chugar.patterns.singleton.ScrableSingleton;
 import com.chugar.patterns.state.ATMMachine;
 import com.chugar.patterns.strategy.Bird;
 import com.chugar.patterns.strategy.Dog;
 import com.chugar.patterns.strategy.action.FlyHigh;
+import com.chugar.patterns.template.SalamiSandwich;
+import com.chugar.patterns.template.VeggieSandwich;
 
 public class MainApp {
 
@@ -51,7 +55,9 @@ public class MainApp {
 		// chainOfResponsibility();
 		// compositePattern();
 		// facadePattern();
-		statePattern();
+		// statePattern();
+		// templatePattern();
+		proxyPattern();
 		
 	}
 
@@ -303,6 +309,49 @@ public class MainApp {
 		machine.insertpin(1234);
 		machine.requestCash(20000);	
 		machine.ejectCard();	
+	}
+	
+	
+	/**
+	 * Template
+	 * Behavioral pattern
+	 * 
+	 * Define the steps of an algorithm inside of a method
+	 * Defers intermediate steps to client subclasses. 
+	 */
+	public static void templatePattern() {
+		
+		SalamiSandwich salamiSandwich = new SalamiSandwich();
+		salamiSandwich.makeSandwich();
+		
+		System.out.println("-----------------------");
+		
+		VeggieSandwich veggieSandwich = new VeggieSandwich();
+		veggieSandwich.makeSandwich();
+	}
+	
+	
+	/**
+	 * Proxy
+	 * Structural pattern
+	 */
+	public static void proxyPattern() {
+		
+		MessageEmitter emitter = new MessageEmitter();
+		emitter.emitPassword();
+		emitter.emitMessage();
+		emitter.knownMethod();
+		emitter.secretMethod();
+		
+		MessageProxy proxyEmitter = new MessageEmitter();
+		proxyEmitter.emitMessage();
+		proxyEmitter.knownMethod();
+		
+		
+		// forbidden methods : errors out
+		// proxyEmitter.emitPassword();
+		// proxyEmitter.secretMethod();
+		
 	}
 	
 
