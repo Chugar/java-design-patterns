@@ -8,11 +8,12 @@ import com.chugar.patterns.Adapter.Customer;
 import com.chugar.patterns.Adapter.Employe;
 import com.chugar.patterns.Adapter.EmployeAdapter;
 import com.chugar.patterns.Adapter.ICustomer;
-import com.chugar.patterns.bridge.DVDDevice;
-import com.chugar.patterns.bridge.MuteRemote;
-import com.chugar.patterns.bridge.PauseRemote;
-import com.chugar.patterns.bridge.Remote;
-import com.chugar.patterns.bridge.TVDevice;
+import com.chugar.patterns.bridge.CarDoor;
+import com.chugar.patterns.bridge.HomeDoor;
+import com.chugar.patterns.bridge.abstraction.Door;
+import com.chugar.patterns.bridge.implementation.CarKey;
+import com.chugar.patterns.bridge.implementation.CrowBar;
+import com.chugar.patterns.bridge.implementation.HomeKey;
 import com.chugar.patterns.builder.Phone;
 import com.chugar.patterns.chainOfResponsibility.ChainAdd;
 import com.chugar.patterns.chainOfResponsibility.ChainMax;
@@ -55,14 +56,14 @@ public class MainApp {
 		// builderPattern();
 		// decoratorPattern();
 		// adapterPattern();
-		// bridgePattern();
+		 bridgePattern();
 		// chainOfResponsibility();
 		// compositePattern();
 		// facadePattern();
 		// statePattern();
 		// templatePattern();
 		// proxyPattern();
-		iteratorPattern();
+		// iteratorPattern();
 		
 	}
 
@@ -214,28 +215,23 @@ public class MainApp {
 	 * Bridge
 	 * Structural pattern
 	 * 
-	 * Decouples an abstraction from its implementation
+	 * Decouples abstraction from implementation
 	 */
 	public static void bridgePattern() {
-		Remote pauseRemote = new PauseRemote(new TVDevice(1, 200));
-		Remote muteRemote =  new MuteRemote(new TVDevice(1, 200));
-		Remote dvdPauseRemote = new PauseRemote(new DVDDevice(0, 15));
 		
-		pauseRemote.pressRight();
-		pauseRemote.pressLeft();
-		pauseRemote.pressMiddleButton();
+		// Abstraction = door
+		// implementation = key
+		Door homeDoor = new HomeDoor(new HomeKey(), "1 avenue de la Liberation");
+		homeDoor.openDoor();
+		System.out.println();
+
+		
+		Door otherHomeDoor = new HomeDoor(new CrowBar(), "13 place Marechal Lyaute");
+		otherHomeDoor.openDoor();
 		System.out.println();
 		
-		muteRemote.pressRight();
-		muteRemote.pressLeft();
-		muteRemote.pressMiddleButton();
-		System.out.println();
-		
-		dvdPauseRemote.pressRight();
-		dvdPauseRemote.pressLeft();
-		dvdPauseRemote.pressLeft();
-		dvdPauseRemote.pressMiddleButton();
-		
+		Door carDoor = new CarDoor(new CarKey(), "Mercedes");
+		carDoor.openDoor();
 	}
 	
 	
@@ -350,7 +346,7 @@ public class MainApp {
 		emitter.knownMethod();
 		emitter.secretMethod();
 		
-		MessageProxy proxyEmitter = new MessageEmitter();
+ 		MessageProxy proxyEmitter = new MessageEmitter();
 		proxyEmitter.emitMessage();
 		proxyEmitter.knownMethod();
 		// forbidden methods : errors out
